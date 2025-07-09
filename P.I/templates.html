@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Linha do Tempo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <header>
+      <nav class="Topo">
+        <div class="logo">   MINHA LINHA DO TEMPO</div>
+        <ul class="nav-links">
+          <li><a href="#">LOGIN</a></li>
+          <li><a href="#">INÍCIO</a></li>
+          <li><a href="#">MEUS PROJETOS</a></li>
+          <li><a href="#">COMPARTILHAR</a></li>
+          <li><a href="#">CONFIGURAÇÕES</a></li>
+          <li><a href="#">SOBRE</a></li>
+        </ul>
+      </nav>
+      <div class="logo2">CRIE SUA LINHA DO TEMPO</div>
+    </header>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>1976 a 1977 - CORINTHIANS</h1>
+        <img src="https://via.placeholder.com/1200x400" alt="Destaque" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. A partida foi
+          marcada por grandes emoções...
+        </p>
+        <a href="#" class="btn">VER</a>
+      </div>
+    </section>
+
+    <button class="plus-button">+</button>
+
+    <script>
+      // Função para alternar o menu
+      function toggleMenu() {
+        const nav = document.querySelector(".Topo");
+        nav.classList.toggle("open");
+      }
+    </script>
+  </body>
+</html>

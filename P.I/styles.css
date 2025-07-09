@@ -1,0 +1,79 @@
+.logo {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  right: 00px;
+  margin-left: 22px;
+
+}
+.logo2 { 
+  margin-left: 80px;
+  color: #df1f1f;
+}
+/* Estilo para o menu lateral */
+.Topo {
+  position: fixed;
+  top: 0;
+  left: -280px; /* Esconde o menu fora da tela */
+  width: 250px;
+  height: 100%;
+  background-color: #dd221c;
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: left 0.3s ease; /* Transição suave */
+}
+
+.Topo.open {
+  left: 0; /* Mostra o menu */
+}
+
+.nav-links {
+  list-style: none;
+  padding: x0;
+}
+
+.nav-links li {
+  margin: 14px 0;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Botão para abrir o menu */
+.menu-button {
+  position: fixed;
+  top: 10px;
+  left: 0px;
+  background-color: #dd221c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.plus-button {
+  width: 60px;
+  height: 60px;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.plus-button:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendendo DOM</title>
+</head>
+<style>
+    body {
+        background-color: #000b0c;
+        font-family: Arial, sans-serif;
+        color: #ffffff;
+    }
+    button {
+        color: #ffffff;
+        background-color: #000b0c;
+        border-color: rgb(255, 179, 0);
+        border-radius: 5px;
+    }
+</style>
+<body>
+    <h1>Aprendendo um pouco de DOM.</h1>
+    <script>
+        window.document.write('Texto adicionado com o método write() do objeto document.');
+        window.document.write('<br>');
+        window.document.write('Uma quebra de linha (br), adicionada no texto com o método write().');
+        window.document.write('<br>');
+        window.document.write('<br>');
+        window.document.write('<br>');
+        window.document.write('Alterando coisas do HTML alteradas com JavaScript.');
+        window.document.title = 'Aprendendo DOM com JavaScript';
+        window.document.body.style.backgroundColor = '#36e3ef';
+                window.document.write('<br>');
+        window.document.write('<br>');
+
+    </script>
+    <button onclick="mostrarNumeroAleatorio()">Clique aqui</button>
+    <div id="resultado"></div>
+    <script src="script.js"></script>
+ 
+</body>
+</html>

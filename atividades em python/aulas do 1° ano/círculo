@@ -1,0 +1,16 @@
+import turtle
+import math
+
+# Configuração inicial
+t = turtle.Turtle()
+t.speed(1)  # Velocidade do desenho
+
+# Calcula o raio com base na área desejada (aproximadamente 100 unidades quadradas)
+area_desejada = 100000
+raio = math.sqrt(area_desejada / math.pi)
+
+# Desenha o círculo com o raio calculado
+t.circle(raio)
+
+# Fecha a janela quando o desenho estiver pronto
+turtle.done()
