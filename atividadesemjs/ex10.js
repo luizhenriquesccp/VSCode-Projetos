@@ -15,3 +15,4 @@ entrada.question("Digite um número para eu verificar se é positivo:", (nInput)
     }
     entrada.close();
 })
+console.log(n)
