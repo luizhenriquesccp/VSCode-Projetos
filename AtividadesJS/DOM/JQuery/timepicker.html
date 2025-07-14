@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo Timepicker</title>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <!-- Timepicker CSS -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  
+  <!-- Timepicker JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+  </style>
+</head>
+<body>
+  <h1>Escolha um horário</h1>
+  <input type="text" class="timepicker" placeholder="Clique aqui">
+
+  <script>
+    $(function(){
+      $('input.timepicker').timepicker({
+        timeFormat: 'HH:mm',       // formato de 24h :contentReference[oaicite:1]{index=1}
+        interval: 30,              // intervalo em minutos :contentReference[oaicite:2]{index=2}
+        minTime: '08:00',          // horário mínimo :contentReference[oaicite:3]{index=3}
+        maxTime: '18:00',          // horário máximo :contentReference[oaicite:4]{index=4}
+        defaultTime: '09:00',      // valor inicial
+        dynamic: false,            // dropdown fixo (não gira com valor selecionado)
+        dropdown: true,            // mostra dropdown ao focar
+        scrollbar: true            // exibe scrollbar no dropdown
+      });
+      
+      // Exemplo de callback ao alterar o valor
+      $('input.timepicker').on('changeTime', function() {
+        console.log('Horário selecionado:', $(this).val());
+      });
+    });
+  </script>
+</body>
+</html>
