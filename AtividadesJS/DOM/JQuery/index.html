@@ -33,6 +33,14 @@
         });
       });
     </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#tabela-agendamentos').DataTable();
+      });
+    </script>
+    
   </head>
   <body>
     <header>
@@ -75,6 +83,19 @@
           });
         });
       </script>
+      <table id="tabela-agendamentos" style="background-color: rgb(200, 228, 228);">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Laboratório</th>
+            <th>Responsável</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Linhas com agendamentos -->
+        </tbody>
+      </table>
     </header>
     <main></main>
   </body>
