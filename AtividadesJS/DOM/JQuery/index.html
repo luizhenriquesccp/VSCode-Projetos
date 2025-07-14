@@ -60,14 +60,14 @@
       <script>
         $(function () {
           $("input.timepicker").timepicker({
-            timeFormat: "HH:mm", // formato de 24h :contentReference[oaicite:1]{index=1}
-            interval: 30, // intervalo em minutos :contentReference[oaicite:2]{index=2}
-            minTime: "08:00", // horário mínimo :contentReference[oaicite:3]{index=3}
-            maxTime: "18:00", // horário máximo :contentReference[oaicite:4]{index=4}
-            defaultTime: "09:00", // valor inicial
-            dynamic: false, // dropdown fixo (não gira com valor selecionado)
-            dropdown: true, // mostra dropdown ao focar
-            scrollbar: true, // exibe scrollbar no dropdown
+            timeFormat: "HH:mm", 
+            interval: 30, 
+            minTime: "08:00", 
+            maxTime: "22:00", 
+            defaultTime: "09:00", 
+            dynamic: false, 
+            dropdown: true, 
+            scrollbar: true, 
           });
 
           $("input.timepicker").on("changeTime", function () {
