@@ -1,0 +1,28 @@
+.azul {
+    color: rgb(16, 57, 240);
+}
+.grande {
+    font-size: 40px;
+}
+.pequeno {
+    font-size: 14px;
+}
+.amarelo{
+    color: yellow;
+}
+.bgcolor{
+    background-color: orange;
+}
+.caixa{
+    width: 100px;
+    background-color: black;
+    height: 100px;
+}
+.caixa:hover{
+    background-color: pink;
+    cursor: pointer;
+}
+p:hover{
+    color: red;
+    cursor: crosshair;
+}

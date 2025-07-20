@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.exterior {
+    width: 300px;
+    background-color: pink;
+}
+.interior {
+    width: 100px;
+    height: 50px;
+    background-color: red;
+}
+.interior2 {
+    width: 100px;
+    height: 50px;
+    background-color: blue;
+}
+ div {
+    background-color: black;
+    padding-top: 10px;
+    width: 150px;
+    height: 40px;
+    margin: 5px;
+    color: white;
+    font-family: 'Segoe UI';
+    font-size: 20px;
+    border-radius: 30px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 2s;
+    overflow: scroll;
+ }
+
+ div:hover {
+    background-color: white;
+    color: black;
+ }

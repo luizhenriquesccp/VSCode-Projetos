@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css"
+    />
+    <link rel="stylesheet" href="/resources/demos/style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script>
+      $(function () {
+        $("#datepicker").datepicker();
+      });
+    </script>
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"
+    />
+  </head>
+  <body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <nav>
+      <ul>
+        LabAgenda
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Sobre</a></li>
+        <li><a href="#">Serviços</a></li>
+        <li><a href="#">Contato</a></li>
+      </ul>
+    </nav>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, ullam
+      exercitationem quisquam in <br />
+      laudantium obcaecati sunt perferendis itaque culpa vel molestiae numquam
+      laboriosam voluptas impedit consequatur fugit esse ut necessitatibus.
+      Date: <input type="text" id="datepicker" />
+    </p>
+
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatem
+      deleniti molestias nobis voluptatum reprehenderit aspernatur doloremque
+      cupiditate praesentium aliquam dolorum? Fuga distinctio veritatis suscipit
+      eaque minus magnam Hora: <input type="text" class="timepicker" /> dolorum
+      natus incidunt.
+    </p>
+
+    <script>
+      $(".timepicker").timepicker({
+        timeFormat: "h:mm p",
+        interval: 30,
+        minTime: "7:00am",
+        maxTime: "22:00pm",
+        defaultTime: "11:00",
+        startTime: "7:00",
+        dynamic: false,
+        dropdown: true,
+        scrollbar: true,
+      });
+    </script>
+  </body>
+</html>
