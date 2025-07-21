@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agenda de Laboratório</title>
+
+  <!-- Estilos jQuery UI e Timepicker -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"/>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"/>
+
+  <!-- jQuery e plugins -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+    .form-control { margin-bottom: 10px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: left; background: #fff; }
+    button { padding: 10px 20px; background: #007BFF; color: white; border: none; cursor: pointer; border-radius: 4px; }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+  <h2>Agendamento de Laboratório</h2>
+
+  <div class="form-control">
+    <label>Data: <input type="text" id="datepicker" /></label>
+  </div>
+
+  <div class="form-control">
+    <label>Hora: <input type="text" class="timepicker" /></label>
+  </div>
+
+  <button id="salvar">Salvar Agendamento</button>
+
+  <table id="tabela-agendamentos">
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Hora</th>
+        <th>Laboratório</th>
+        <th>Responsável</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <button onclick="mostrar()">mostrar hora</button>
+  <script>
+    $(function () {
+      // Ativa os widgets
+      $("#datepicker").datepicker({
+        dateFormat: "dd/mm/yy",
+        showOtherMonths: true,
+        selectOtherMonths: true,
+      });
+
+      $(".timepicker").timepicker({
+        timeFormat: "HH:mm",
+        interval: 30,
+        minTime: "08:00",
+        maxTime: "22:00",
+        defaultTime: "09:00",
+        dropdown: true,
+        scrollbar: true,
+      });
+
+      // Função para adicionar à tabela e salvar no localStorage
+      function adicionarAgendamento(data, hora) {
+        // Adiciona à tabela
+        $("#tabela-agendamentos tbody").append(`
+          <tr>
+            <td>${data}</td>
+            <td>${hora}</td>
+            <td>Lab 01</td>
+            <td>Usuário</td>
+          </tr>
+        `);
+
+        // Salva no localStorage
+        let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+        lista.push({ data: data, hora: hora });
+        localStorage.setItem("agendamentos", JSON.stringify(lista));
+      }
+
+      // Botão salvar
+      $("#salvar").on("click", function () {
+        const data = $("#datepicker").val();
+        const hora = $(".timepicker").val();
+
+        if (!data || !hora) {
+          alert("Preencha a data e a hora!");
+          return;
+        }
+
+        adicionarAgendamento(data, hora);
+        alert("Agendamento salvo!");
+      });
+
+      // Recuperar dados ao abrir
+      const agendamentosSalvos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+      agendamentosSalvos.forEach(ag => {
+        $("#tabela-agendamentos tbody").append(`
+          <tr>
+            <td>${ag.data}</td>
+            <td>${ag.hora}</td>
+            <td>Lab 01</td>
+            <td>Usuário</td>
+          </tr>
+        `);
+      });
+    });
+    function mostrar() {
+        let hora = localStorage.getItem("hora");
+        alert("Você salvou: " + hora);
+      }
+
+  </script>
+</body>
+</html>
