@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste simples envolvendo LocalStorage</title>
+</head>
+<body>
+    <h1>Salvando um valor</h1>
+    <label>Digite aqui algo:</label>
+    <input type="text" id="sla">
+    <button onclick="mostrar()">Salve a informação</button>
+    <div>
+       Valor salvo:
+        <button onclick="exibirMSG()"> aperte aqui</button>
+        <p id="mensagem"></p>
+    </div>
+    <script>
+        function mostrar() {
+            let file = document.getElementById('sla').value;
+            localStorage.setItem('nomedachave', file); // Corrigido para setItem
+        }
+        function exibirMSG() {
+            let MSG = document.getElementById('mensagem'); // Corrigido para 'mensagem'
+            let valor = localStorage.getItem('nomedachave');
+            MSG.textContent = valor ? valor : "Nada salvo!";
+        }
+    </script>
+</body>
+</html>
