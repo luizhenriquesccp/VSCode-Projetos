@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
-      href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
     />
     <link
       rel="stylesheet"
@@ -17,10 +17,9 @@
       rel="stylesheet"
       href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
     />
-      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-      <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
   </head>
   <body>
     <header>
@@ -80,10 +79,12 @@
             <th>Responsável</th>
           </tr>
         </thead>
-        <tbody>
-        </tbody>
+        <tbody></tbody>
       </table>
-
+      <div>
+        <label>requisitar um dado:</label>
+        <button onclick="Mostrar()">Mostrar</button>
+      </div>
 
       <script>
         $(function () {
@@ -95,51 +96,45 @@
         $("#timepicker").timepicker({
           timeFormat: "HH:mm",
           interval: 30,
-          minTime: "08:00",
+          minTime: "07:00",
           maxTime: "22:00",
-          defaultTime: "09:00",
+          defaultTime: "07:00",
           dropdown: true,
           scrollbar: true,
         });
-              // Função para adicionar à tabela e salvar no localStorage
-      function adicionarAgendamento(data, hora, laboratorio, responsavel) {
-        // Adiciona à tabela
-        $("#tabela-agendamentos tbody").append(`
+        function adicionarAgendamento(data, hora) {
+          $("#tabela-agendamentos tbody").append(`
           <tr>
             <td>${data}</td>
             <td>${hora}</td>
-            <td>${laboratorio}</td>
-            <td>${responsavel}</td>
+            <td>laboratorio</td>
+            <td>responsavel</td>
           </tr>
         `);
 
-        // Salva no localStorage
-        let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
-        lista.push({ data, hora, laboratorio, responsavel });
-        localStorage.setItem("agendamentos", JSON.stringify(lista));
-      }
-
-      // Botão salvar
-      $("#salvar").on("click", function () {
-        const data = $("#datepicker").val();
-        const hora = $("#timepicker").val();
-        const laboratorio = $("#laboratorio").val();
-        const responsavel = $("#responsavel").val();
-
-        if (!data || !hora || !laboratorio || !responsavel) {
-          alert("Preencha todos os campos!");
-          return;
+          var lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+          lista.push({ data, hora });
+          localStorage.setItem("agendamentos", JSON.stringify(lista));
         }
 
-        adicionarAgendamento(data, hora, laboratorio, responsavel);
-        alert("Agendamento salvo!");
-      });
+        $("#salvar").on("click", function () {
+          const data = $("#datepicker").val();
+          const hora = $("#timepicker").val();
 
-      // Exibir agendamentos salvos ao carregar a página
-      $(function () {
-        const agendamentosSalvos = JSON.parse(localStorage.getItem("agendamentos")) || [];
-        agendamentosSalvos.forEach(ag => {
-          $("#tabela-agendamentos tbody").append(`
+          if (!data || !hora) {
+            alert("Preencha todos os campos!");
+            return;
+          }
+
+          adicionarAgendamento(data, hora);
+          alert("Agendamento salvo!");
+        });
+
+        $(function () {
+          const agendamentosSalvos =
+            JSON.parse(localStorage.getItem("agendamentos")) || [];
+          agendamentosSalvos.forEach((ag) => {
+            $("#tabela-agendamentos tbody").append(`
             <tr>
               <td>${ag.data}</td>
               <td>${ag.hora}</td>
@@ -147,8 +142,25 @@
               <td>Usuário</td>
             </tr>
           `);
+          });
         });
-      });
+        function Mostrar() {
+    const dadosBrutos = localStorage.getItem("agendamentos");
+
+    if (!dadosBrutos) {
+      alert("Nenhum agendamento encontrado.");
+      return;
+    }
+
+    const lista = JSON.parse(dadosBrutos);
+
+    if (Array.isArray(lista) && lista.length > 0 && lista[0].hora) {
+      alert("Você salvou: " + lista[0].hora);
+      console.log("Hora do primeiro agendamento:", lista[0].hora);
+    } else {
+      alert("Nenhum horário encontrado.");
+    }
+  }
       </script>
     </main>
   </body>

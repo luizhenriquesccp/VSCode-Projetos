@@ -18,10 +18,10 @@
     <script>
         function mostrar() {
             let file = document.getElementById('sla').value;
-            localStorage.setItem('nomedachave', file); // Corrigido para setItem
+            localStorage.setItem('nomedachave', file);
         }
         function exibirMSG() {
-            let MSG = document.getElementById('mensagem'); // Corrigido para 'mensagem'
+            let MSG = document.getElementById('mensagem'); 
             let valor = localStorage.getItem('nomedachave');
             MSG.textContent = valor ? valor : "Nada salvo!";
         }

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LabAgenda - Teste com jQuery</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <h1 class="logo">LabAgenda - Teste com jQuery</h1>
+        <ul class="nav-links">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Início</a></li>
+          <li><a href="#">Configurações</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <div
+        id="calendar-container"
+        style="
+          width: 320px;
+          margin: 40px auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+        "
+      >
+        <label for="datepicker">Selecione uma data:</label>
+        <input type="text" id="datepicker" style="width: 100%; padding: 8px" readonly />
+
+        <div id="timepicker-container" style="margin-top: 20px">
+          <label for="timepicker">Selecione um horário:</label>
+          <input type="text" id="timepicker" style="width: 100%; padding: 8px" readonly />
+        </div>
+
+        <div style="margin-top: 20px">
+          <label for="laboratorio">Laboratório:</label>
+          <input type="text" id="laboratorio" style="width: 100%; padding: 8px" />
+        </div>
+
+        <div style="margin-top: 20px">
+          <label for="responsavel">Responsável:</label>
+          <input type="text" id="responsavel" style="width: 100%; padding: 8px" />
+        </div>
+
+        <button id="salvar" style="margin-top: 20px; width: 100%">Salvar</button>
+      </div>
+
+      <table id="tabela-agendamentos" style="width: 80%; margin: auto; border-collapse: collapse" border="1">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Laboratório</th>
+            <th>Responsável</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </main>
+
+    <script>
+      $(function () {
+        // Inicializa o datepicker
+        $("#datepicker").datepicker({
+          dateFormat: "dd/mm/yy",
+          showOtherMonths: true,
+          selectOtherMonths: true,
+        });
+
+        // Inicializa o timepicker
+        $("#timepicker").timepicker({
+          timeFormat: "HH:mm",
+          interval: 30,
+          minTime: "08:00",
+          maxTime: "22:00",
+          defaultTime: "08:00",
+          dropdown: true,
+          scrollbar: true,
+        });
+
+        // Função para adicionar à tabela e salvar no localStorage
+        function adicionarAgendamento(data, hora, laboratorio, responsavel) {
+          // Adiciona à tabela
+          $("#tabela-agendamentos tbody").append(`
+            <tr>
+              <td>${data}</td>
+              <td>${hora}</td>
+              <td>${laboratorio}</td>
+              <td>${responsavel}</td>
+            </tr>
+          `);
+
+          // Salva no localStorage
+          let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+          lista.push({ data, hora, laboratorio, responsavel });
+          localStorage.setItem("agendamentos", JSON.stringify(lista));
+        }
+
+        // Botão salvar
+        $("#salvar").on("click", function () {
+          const data = $("#datepicker").val();
+          const hora = $("#timepicker").val();
+          const laboratorio = $("#laboratorio").val();
+          const responsavel = $("#responsavel").val();
+
+          if (!data || !hora || !laboratorio || !responsavel) {
+            alert("Preencha todos os campos!");
+            return;
+          }
+
+          adicionarAgendamento(data, hora, laboratorio, responsavel);
+          alert("Agendamento salvo!");
+        });
+
+        // Exibe agendamentos salvos ao carregar
+        const agendamentosSalvos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+        agendamentosSalvos.forEach((ag) => {
+          $("#tabela-agendamentos tbody").append(`
+            <tr>
+              <td>${ag.data}</td>
+              <td>${ag.hora}</td>
+              <td>${ag.laboratorio}</td>
+              <td>${ag.responsavel}</td>
+            </tr>
+          `);
+        });
+      });
+    </script>
+  </body>
+</html>
