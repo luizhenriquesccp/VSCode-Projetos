@@ -145,14 +145,14 @@
           });
         });
         function Mostrar() {
-    const dadosBrutos = localStorage.getItem("agendamentos");
+    const todosdados = localStorage.getItem("agendamentos");
 
-    if (!dadosBrutos) {
+    if (!todosdados) {
       alert("Nenhum agendamento encontrado.");
       return;
     }
 
-    const lista = JSON.parse(dadosBrutos);
+    const lista = JSON.parse(todosdados);
 
     if (Array.isArray(lista) && lista.length > 0 && lista[0].hora) {
       alert("Você salvou: " + lista[0].hora);
