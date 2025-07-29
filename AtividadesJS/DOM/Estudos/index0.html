@@ -82,8 +82,11 @@
         <tbody></tbody>
       </table>
       <div>
-        <label>requisitar um dado:</label>
-        <button onclick="Mostrar()">Mostrar</button>
+        <label>Requisitar um dado:</label>
+        <button onclick="Mostrar()">Mostrar</button><br>
+        <p id="dadorequest"></p><br>    
+        <label>Excluir reserva</label>
+        <button onclick="Excluir()">Excluir</button>
       </div>
 
       <script>
@@ -147,7 +150,13 @@
       function Mostrar(){
         const agendamentosSalvos = 
         JSON.parse(localStorage.getItem('agendamentos')) || [];
-        console.log('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)};
+        console.log('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)
+        $('#dadorequest').append('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)};
+      function Excluir(){
+        const agendamentosSalvos = 
+        JSON.parse(localStorage.getItem('agendamentos')) || [];
+        delete agendamentosSalvos[0];}
+
       </script>
     </main>
   </body>
