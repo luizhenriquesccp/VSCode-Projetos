@@ -9,6 +9,8 @@
     <input id="nome" placeholder="Meu nome" />
     <button onclick="salvar()">Salvar</button>
     <button onclick="mostrar()">Mostrar</button>
+    <button onclick="excluirNome()">Excluir</button>
+
     <script>
       function salvar() {
         let nome = document.getElementById("nome").value;
@@ -19,6 +21,10 @@
       function mostrar() {
         let nome = localStorage.getItem("meuNome");
         alert("Você salvou: " + nome);
+      }
+      function excluirNome() {
+        localStorage.removeItem("nome");
+        console.log("Nome excluído com sucesso!");
       }
     </script>
   </body>

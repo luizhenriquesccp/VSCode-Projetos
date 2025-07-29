@@ -86,8 +86,12 @@
         <button onclick="Mostrar()">Mostrar</button><br>
         <p id="dadorequest"></p><br>    
         <label>Excluir reserva</label>
-        <button onclick="Excluir()">Excluir</button>
+        <button onclick="Excluir()">Excluir</button><br>
+        <label>Limpar a sessão</label>
+        <button onclick="ExcluirTudo()">Limpar</button>
+
       </div>
+
 
       <script>
         $(function () {
@@ -110,8 +114,8 @@
           <tr>
             <td>${data}</td>
             <td>${hora}</td>
-            <td>laboratorio</td>
-            <td>responsavel</td>
+            <td>Lab 01</td>
+            <td>Usuário</td>
           </tr>
         `);
 
@@ -152,10 +156,16 @@
         JSON.parse(localStorage.getItem('agendamentos')) || [];
         console.log('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)
         $('#dadorequest').append('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)};
+      
       function Excluir(){
         const agendamentosSalvos = 
         JSON.parse(localStorage.getItem('agendamentos')) || [];
-        delete agendamentosSalvos[0];}
+        localStorage.removeItem('agendamentos'); 
+      }
+
+      function ExcluirTudo(){
+        localStorage.clear(); 
+      }
 
       </script>
     </main>
