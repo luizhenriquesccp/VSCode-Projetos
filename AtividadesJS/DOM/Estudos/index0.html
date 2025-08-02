@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LabAgenda - Teste com jQuery</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
-    />
+    <!-- Adicione o CSS do jQuery UI Autocomplete e Tabs se desejar -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css"
@@ -55,6 +53,7 @@
           style="width: 100%; padding: 8px; font-size: 16px"
           readonly
         />
+
         <div id="timepicker-container" style="margin-top: 20px">
           <label
             for='timepicker'
@@ -68,72 +67,141 @@
             readonly
           />
         </div>
+
+        <!-- Campo Autocomplete para responsável -->
+        <div style="margin-top: 20px">
+          <label
+            for="responsavel"
+            style="display: block; margin-bottom: 10px; font-weight: bold"
+            >Responsável:</label
+          >
+          <input
+            type="text"
+            id="responsavel"
+            style="width: 100%; padding: 8px; font-size: 16px"
+          />
+        </div>
+
         <button id="salvar">Salvar</button>
+        <button onclick="abrirDialog()">Agendar (com Dialog)</button>
       </div>
-      <table id="tabela-agendamentos">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Hora</th>
-            <th>Laboratório</th>
-            <th>Responsável</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+
+      <!-- Tabs para laboratórios -->
+      <div id="tabs" style="margin: 40px auto; width: 80%">
+        <ul>
+          <li><a href="#tabs-1">Lab 01</a></li>
+          <li><a href="#tabs-2">Lab 02</a></li>
+        </ul>
+        <div id="tabs-1">
+          <table id="tabela-agendamentos">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Laboratório</th>
+                <th>Responsável</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div id="tabs-2">
+          <p>Agenda do Lab 02 (exemplo)</p>
+        </div>
+      </div>
+
       <div>
         <label>Requisitar um dado:</label>
         <button onclick="Mostrar()">Mostrar</button><br>
-        <p id="dadorequest"></p><br>    
+        <p id="dadorequest"></p><br>
         <label>Excluir reserva</label>
         <button onclick="Excluir()">Excluir</button><br>
         <label>Limpar a sessão</label>
         <button onclick="ExcluirTudo()">Limpar</button>
-
       </div>
 
+      <!-- Dialog oculto -->
+      <div id="dialog-confirm" title="Confirmar agendamento" style="display:none;">
+        <p>Deseja realmente agendar este horário?</p>
+      </div>
 
       <script>
         $(function () {
+          // Datepicker
           $("#datepicker").datepicker({
             showOtherMonths: true,
             selectOtherMonths: true,
+            dateFormat: "dd/mm/yy",
+            minDate: 0
           });
+
+          // Timepicker
+          $("#timepicker").timepicker({
+            timeFormat: "HH:mm",
+            interval: 30,
+            minTime: "07:00",
+            maxTime: "22:00",
+            defaultTime: "07:00",
+            dropdown: true,
+            scrollbar: true,
+          });
+
+          // Autocomplete para responsável
+          var nomes = ["Ana", "Bruno", "Carlos", "Daniela", "Eduardo"];
+          $("#responsavel").autocomplete({
+            source: nomes
+          });
+
+          // Tabs
+          $("#tabs").tabs();
         });
-        $("#timepicker").timepicker({
-          timeFormat: "HH:mm",
-          interval: 30,
-          minTime: "07:00",
-          maxTime: "22:00",
-          defaultTime: "07:00",
-          dropdown: true,
-          scrollbar: true,
-        });
-        function adicionarAgendamento(data, hora) {
+
+        // Dialog de confirmação
+        function abrirDialog() {
+          $("#dialog-confirm").dialog({
+            resizable: false,
+            height: "auto",
+            width: 400,
+            modal: true,
+            buttons: {
+              "Sim": function () {
+                // Aqui você pode chamar a função de salvar agendamento
+                $("#salvar").click();
+                $(this).dialog("close");
+              },
+              "Não": function () {
+                $(this).dialog("close");
+              }
+            }
+          });
+        }
+
+        function adicionarAgendamento(data, hora, responsavel) {
           $("#tabela-agendamentos tbody").append(`
-          <tr>
-            <td>${data}</td>
-            <td>${hora}</td>
-            <td>Lab 01</td>
-            <td>Usuário</td>
-          </tr>
-        `);
+            <tr>
+              <td>${data}</td>
+              <td>${hora}</td>
+              <td>Lab 01</td>
+              <td>${responsavel}</td>
+            </tr>
+          `);
 
           var lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
-          lista.push({ data, hora });
+          lista.push({ data, hora, responsavel });
           localStorage.setItem('agendamentos', JSON.stringify(lista));
         }
 
         $("#salvar").on("click", function () {
           const data = $("#datepicker").val();
           const hora = $("#timepicker").val();
+          const responsavel = $("#responsavel").val();
 
-          if (!data || !hora) {
+          if (!data || !hora || !responsavel) {
             alert('Preencha todos os campos!');
             return;
           }
 
-          adicionarAgendamento(data, hora);
+          adicionarAgendamento(data, hora, responsavel);
           alert('Agendamento salvo!');
         });
 
@@ -142,31 +210,51 @@
             JSON.parse(localStorage.getItem('agendamentos')) || [];
           agendamentosSalvos.forEach((ag) => {
             $("#tabela-agendamentos tbody").append(`
-            <tr>
-              <td>${ag.data}</td>
-              <td>${ag.hora}</td>
-              <td>Lab 01</td>
-              <td>Usuário</td>
-            </tr>
-          `);
+              <tr>
+                <td>${ag.data}</td>
+                <td>${ag.hora}</td>
+                <td>Lab 01</td>
+                <td>${ag.responsavel || 'Usuário'}</td>
+              </tr>
+            `);
           });
         });
-      function Mostrar(){
-        const agendamentosSalvos = 
-        JSON.parse(localStorage.getItem('agendamentos')) || [];
-        console.log('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)
-        $('#dadorequest').append('O primeiro agendamento foi as ', agendamentosSalvos[0].hora, 'Para ', agendamentosSalvos[0].data)};
-      
-      function Excluir(){
-        const agendamentosSalvos = 
-        JSON.parse(localStorage.getItem('agendamentos')) || [];
-        localStorage.removeItem('agendamentos'); 
-      }
 
-      function ExcluirTudo(){
-        localStorage.clear(); 
-      }
+        function Mostrar() {
+          const agendamentosSalvos =
+            JSON.parse(localStorage.getItem('agendamentos')) || [];
+          if (agendamentosSalvos.length > 0) {
+            $('#dadorequest').text('O primeiro agendamento foi às ' + agendamentosSalvos[0].hora + ' para ' + agendamentosSalvos[0].data);
+          } else {
+            $('#dadorequest').text('Nenhum agendamento encontrado.');
+          }
+        }
 
+        function Excluir() {
+          let agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+          if (agendamentos.length > 0) {
+            agendamentos.shift(); // Remove o primeiro elemento
+            localStorage.setItem('agendamentos', JSON.stringify(agendamentos));
+            // Atualiza a tabela na tela
+            $("#tabela-agendamentos tbody").empty();
+            agendamentos.forEach((ag) => {
+              $("#tabela-agendamentos tbody").append(`
+                <tr>
+                  <td>${ag.data}</td>
+                  <td>${ag.hora}</td>
+                  <td>Lab 01</td>
+                  <td>${ag.responsavel || 'Usuário'}</td>
+                </tr>
+              `);
+            });
+          }
+        }
+
+        function ExcluirTudo() {
+          localStorage.clear();
+          $("#tabela-agendamentos tbody").empty();
+          $('#dadorequest').text('');
+        }
       </script>
     </main>
   </body>

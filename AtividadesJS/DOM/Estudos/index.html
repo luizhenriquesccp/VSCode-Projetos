@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -79,11 +78,17 @@
             <th>Responsável</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody  class="sortable"></tbody>
       </table>
       <div>
-        <label>requisitar um dado:</label>
-        <button onclick="Mostrar()">Mostrar</button>
+        <label>Requisitar um dado:</label>
+        <button onclick="Mostrar()">Mostrar</button><br />
+        <p id="dadorequest"></p>
+        <br />
+        <label>Excluir reserva</label>
+        <button onclick="Excluir()">Excluir</button><br />
+        <label>Limpar a sessão</label>
+        <button onclick="ExcluirTudo()">Limpar</button>
       </div>
 
       <script>
@@ -107,8 +112,8 @@
           <tr>
             <td>${data}</td>
             <td>${hora}</td>
-            <td>laboratorio</td>
-            <td>responsavel</td>
+            <td>Lab 01</td>
+            <td>Usuário</td>
           </tr>
         `);
 
@@ -145,22 +150,49 @@
           });
         });
         function Mostrar() {
-    const todosdados = localStorage.getItem("agendamentos");
+          const agendamentosSalvos =
+            JSON.parse(localStorage.getItem("agendamentos")) || [];
+          console.log(
+            "O primeiro agendamento foi as ",
+            agendamentosSalvos[0].hora,
+            "Para ",
+            agendamentosSalvos[0].data
+          );
+          $("#dadorequest").append(
+            "O primeiro agendamento foi as ",
+            agendamentosSalvos[0].hora,
+            "Para ",
+            agendamentosSalvos[0].data
+          );
+        }
 
-    if (!todosdados) {
-      alert("Nenhum agendamento encontrado.");
-      return;
-    }
+        function Excluir() {
+          let agendamentos =
+            JSON.parse(localStorage.getItem("agendamentos")) || [];
+          if (agendamentos.length > 0) {
+            agendamentos.shift(); // Remove o primeiro elemento
+            localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+            // Atualiza a tabela na tela
+            $("#tabela-agendamentos tbody").empty();
+            agendamentos.forEach((ag) => {
+              $("#tabela-agendamentos tbody").append(`
+        <tr>
+          <td>${ag.data}</td>
+          <td>${ag.hora}</td>
+          <td>Lab 01</td>
+          <td>Usuário</td>
+        </tr>
+      `);
+            });
+          }
+        }
 
-    const lista = JSON.parse(todosdados);
-
-    if (Array.isArray(lista) && lista.length > 0 && lista[0].hora) {
-      alert("Você salvou: " + lista[0].hora);
-      console.log("Hora do primeiro agendamento:", lista[0].hora);
-    } else {
-      alert("Nenhum horário encontrado.");
-    }
-  }
+        function ExcluirTudo() {
+          localStorage.clear();
+        }
+        $(function () {
+          $(".sortable").sortable();
+        });
       </script>
     </main>
   </body>
