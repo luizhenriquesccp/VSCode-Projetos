@@ -1,7 +1,10 @@
-<!DOCTYPE html><html lang="en"><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Dialog - Modal form</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <style>
@@ -110,9 +113,22 @@
       });
     } );
     </script>
-  </head>
-  <body>
-   
+
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+          <h1 class="logo">LabAgenda - Teste com jQuery</h1>
+  
+          <ul class="nav-links">
+            <li class="nav-links"><a href="index.html">Inicio</a></li>
+            <li class="nav-links"><a href="telalogin.html">Login</a></li>
+            <li class="nav-links"><a href="#">Configurações</a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+           
   <div id="dialog-form" title="Create new user">
     <p class="validateTips">All form fields are required.</p>
    
@@ -143,17 +159,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>John Doe</td>
-          <td>john.doe@example.com</td>
-          <td>johndoe1</td>
-        </tr>
       </tbody>
     </table>
   </div>
   <button id="create-user">Create new user</button>
-   
-   
-   
-   
-  </body></html>
+    </main>  
+</body>
+</html>
