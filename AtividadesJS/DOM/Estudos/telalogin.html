@@ -76,6 +76,8 @@
         valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
    
         if ( valid ) {
+            gravar();
+            
           $( "#users tbody" ).append( "<tr>" +
             "<td>" + name.val() + "</td>" +
             "<td>" + email.val() + "</td>" +
@@ -112,6 +114,16 @@
         dialog.dialog( "open" );
       });
     } );
+
+    function gravar() {
+        let file= document.getElementById('name').value;
+        localStorage.setItem('nome', file);
+        let file2= document.getElementById('email').value;
+        localStorage.setItem("gmail", file2)
+        let file3= document.getElementById('password').value;
+        localStorage.setItem("senha", file3)
+
+    }
     </script>
 
 </head>
