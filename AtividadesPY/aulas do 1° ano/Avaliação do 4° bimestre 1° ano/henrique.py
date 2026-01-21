@@ -2,7 +2,7 @@ from turtle import Turtle, onscreenclick, exitonclick
 
 le = Turtle()
 desenho_atual = None
-jogo = [[' ']*3 for _ in range(3)]  # Matriz para representar o jogo da velha
+jogo = [[' ']*3 for _ in range(3)]  
 
 le.speed(30)
 le.pensize(5)
@@ -84,23 +84,23 @@ def verificar_vitoria(jogador):
         if all(mark == jogador for mark in marks):
             
             y = 100 - linha * 100
-            desenha_linha(-100, y + 50, 200, y + 50)  # Desenha uma linha horizontal indicando a vitória
+            desenha_linha(-100, y + 50, 200, y + 50)  
             print(f"Vitória para {jogador} na linha!")         
             exitonclick()
     
     for coluna in range(3):
         if all(jogo[linha][coluna] == jogador for linha in range(3)):
             x = coluna * 100
-            desenha_linha(x - 50, 200, x - 50, -100)  # Desenha uma linha vertical 
+            desenha_linha(x - 50, 200, x - 50, -100)  
             print(f"Vitória para {jogador} na coluna!")            
             exitonclick()
 
     if all(jogo[i][i] == jogador for i in range(3)):
-        desenha_linha(-100, 200, 200, -100)  # Desenha uma linha diagonal 
+        desenha_linha(-100, 200, 200, -100)   
         print(f"Vitória para {jogador} na diagonal!")       
         exitonclick()
     elif all(jogo[i][2 - i] == jogador for i in range(3)):
-        desenha_linha(-100, -100, 200, 200)  # Desenha outra linha diagonal 
+        desenha_linha(-100, -100, 200, 200)   
         print(f"Vitória para {jogador} na diagonal!")        
         exitonclick()
 
