@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula dia 19 de 3</title>
+    <script type='text/javascript'>
+        function acender(){
+            var img = document.getElementById('luz');
+            if(img.src.includes('bulbon.gif')){
+                img.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+            } else {
+                img.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+            }
+        }
+    </script>
+</head>
+<body>
+    <img src="https://www.w3schools.com/js/pic_bulboff.gif" id="luz" onclick="acender()">
+    
+</body>
+</html>
