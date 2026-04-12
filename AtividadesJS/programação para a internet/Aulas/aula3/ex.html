@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 3 - Estruturas condicionais e de repetição</title>
+    <script type="text/javascript">
+        function verificarIdade() {
+            idade = document.getElementById("age").value;
+            if (idade >= 0 && idade < 15) {
+                document.querySelector("p").innerHTML = "Criança.";
+            } else if (idade >= 15 && idade < 30) {
+                document.querySelector("p").innerHTML = "Jovem.";
+            } else if (idade >= 30 && idade < 60) {
+                document.querySelector("p").innerHTML = "Adulto.";
+            } else if(idade >=60 ) {
+                document.querySelector("p").innerHTML = "Idoso.";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Exercicio 1</h1>
+    <br>
+    <input type="number" id="age" placeholder="Digite sua idade">
+    <button onclick="verificarIdade()">Verificar Idade</button>
+    <br>
+    <br>
+    <p></p>
+</body>
+</html>

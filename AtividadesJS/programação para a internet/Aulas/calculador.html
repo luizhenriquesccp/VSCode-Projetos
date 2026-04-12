@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculos Aritméticos</title>
+</head>
+<body>
+
+    <h2>Calculadora </h2>
+
+    <button onclick="iniciarCalculo()">Iniciar</button>
+
+    <p>Resultado: <span id="resultado"></span></p>
+
+    <script>
+        function iniciarCalculo() {
+            let num1 = prompt("Digite o primeiro número:");
+            let operacao = prompt("Digite a operação (soma ou subtração):");
+            let num2 = prompt("Digite o segundo número:");
+
+            n1 = parseFloat(num1);
+            n2 = parseFloat(num2);
+
+            let resultado = calculo(n1, n2, operacao);
+
+            document.getElementById("resultado").innerText = resultado;
+        }
+
+        function calculo(num1, num2, operacao) {
+            if (operacao === "soma") {
+                return num1 + num2;
+            } else if (operacao === "subtração" || operacao === "subtracao") {
+                return num1 - num2;
+            } else {
+                return "Operação inválida!";
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula dia 19 de março</title>
+    <script type='text/javascript'>
+        function AcenderApagarLuz() {
+            var img = document.getElementById("luz");
+            if (img.src === "https://www.w3schools.com/js/pic_bulboff.gif") {
+                img.src = "https://www.w3schools.com/js/pic_bulbon.gif";
+            } else {
+                img.src = "https://www.w3schools.com/js/pic_bulboff.gif";
+            }
+        }
+    </script>
+</head>
+<body>
+    <img id="luz" src="https://www.w3schools.com/js/pic_bulboff.gif" onclick="AcenderApagarLuz()">
+</body>
+</html>
